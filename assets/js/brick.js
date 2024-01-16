@@ -54,23 +54,29 @@ class Brick {
     };
 
     hitDirection = other => {
-        const centerX = this.x + (this.width / 2);
-        const centerY = this.y + (this.height / 2);
         const otherCenterX = other.x + other.radius;
         const otherCenterY = other.y + other.radius;
-        const isRight = otherCenterX - centerX > 0;
-        const isBottom = otherCenterY - centerY > 0;
-        const isVertical = Math.abs(otherCenterY - centerY) > Math.abs(otherCenterX - centerX);
-        if (isRight && !isVertical) {
+
+        const leftTest = Math.abs(this.x - otherCenterX);
+        const rightTest = Math.abs((this.x + this.width) - otherCenterX);
+
+        const topTest = Math.abs(this.y - otherCenterY);
+        const bottomTest = Math.abs((this.y + this.height) - otherCenterY);
+
+        const smallest = Math.min(...[leftTest, rightTest, topTest, bottomTest]);
+
+debugger;
+
+        if (smallest === rightTest) {
             return 'RIGHT';
         }
-        if (!isRight && !isVertical) {
+        if (smallest === leftTest) {
             return 'LEFT';
         }
-        if (!isBottom && isVertical) {
+        if (smallest === topTest) {
             return 'TOP';
         }
-        if (isBottom && isVertical) {
+        if (smallest === bottomTest) {
             return 'BOTTOM';
         }
         return 'UNKNOWN';

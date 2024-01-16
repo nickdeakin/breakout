@@ -67,8 +67,11 @@ class Ball {
     };
 
     testCollision = other => {
-        return Math.abs(this.x - other.x) < this.radius + other.width
-            && Math.abs(this.y - other.y) < this.radius;
+        const positionX = this.x - other.x;
+        const positionY = this.y - other.y;
+        const r2 = this.radius * 2;
+        return positionX > 0 && positionX < r2 + other.width
+            && positionY > 0 && positionY < r2 + other.height;
     };
 
     didCollide = event => {

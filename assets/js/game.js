@@ -161,10 +161,11 @@ class Game {
 
         this.ball = new Ball(this.ctx, this.canvas, 5, 'rgba(240, 240, 240, 1)', false);
         this.ball.deadDelegate = this.deadDelegate;
-        this.ball.x = 400;
-        this.ball.x = (this.canvas.width / 2) - (this.ball.radius / 2);
-        this.ball.y = 400;
-        this.ball.vy = -5;
+        this.ball.x = 450;
+        //this.ball.x = (this.canvas.width / 2) - (this.ball.radius / 2);
+        this.ball.y = 50;
+        this.ball.vy = 5;
+        this.ball.vx = -0.5;
         this.gameObjects.push(this.ball);
 
         this.paddle = new Paddle(this.ctx, this.canvas);
