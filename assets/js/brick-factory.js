@@ -45,7 +45,7 @@ class BrickFactory {
     }
 
     removeDeadBricks = () => {
-        this.bricks = this.bricks.filter(x => x.life > 0);
+        this.bricks = this.bricks.filter(x => x.lives > 0);
     }
 
     update = () => {
@@ -66,4 +66,15 @@ class BrickFactory {
             }
         });
     };
+
+    setLevelBricks = bricks => {
+        bricks.forEach(x => {
+            const brick = new Brick(this.ctx, this.canvas);
+            brick.x = x.x;
+            brick.y = x.y;
+            brick.lives = x.lives ?? 1;
+            brick.scoreDelegate = this.scoreDelegate;
+            this.bricks.push(brick);
+        });
+    }
 }

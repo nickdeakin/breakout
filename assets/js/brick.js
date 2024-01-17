@@ -9,7 +9,7 @@ class Brick {
     width = 40;
     height = 20;
     gap = 0;
-    life = 1;
+    lives = 1;
     score = 5;
     color = 'white';
     hitbox;
@@ -34,10 +34,34 @@ class Brick {
             y: this.y,
             width: this.width,
             height: this.height,
-            fillStyle: this.color
+            fillStyle: this.lifeColor()
         };
+
         fillRect(this.ctx, this.hitbox);
     };
+
+    lifeColor = () => {
+        switch (this.lives) {
+            case 5:
+                return 'blue'
+                break;
+            case 4:
+                return 'red'
+                break;
+            case 3:
+                return 'orange'
+                break;
+            case 2:
+                return 'yellow'
+                break;
+            case 1:
+                return 'white'
+                break;
+            default:
+                return 'purple'
+                break;
+        }
+    }
 
     testCollision = other => {
         if (!this.hitbox) {
@@ -86,7 +110,7 @@ class Brick {
         } else if(direction === 'TOP' || direction === 'BOTTOM') {
             event.vy = event.vy * -1;
         }
-        this.life--;
+        this.lives--;
         this.scoreDelegate(this.score);
     };
 }

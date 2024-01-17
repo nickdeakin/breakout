@@ -52,7 +52,9 @@ class Game {
         await this.createGameObjects();
         
         this.score.reset();
-        this.brickFactory.generateRandomBricks();
+        //this.brickFactory.generateRandomBricks();
+
+        this.brickFactory.setLevelBricks(this.testBricks);
 
         this.currentState = Game.GAME_PLAYING;
     };
@@ -256,4 +258,21 @@ class Game {
         drawText(this.ctx, { ...this.textParams, ...{ extraY: -32 } }, '... Game over ...');
         drawText(this.ctx, { ...this.textParams, ...{ extraY: 32 } }, 'Press R to reload');
     };
+
+    testBricks = [
+        {x: 50, y: 40},
+        {x: 50, y: 80},
+        {x: 50, y: 120},
+        {x: 50, y: 160},
+        
+        {x: 100, y: 40},
+        {x: 100, y: 80, lives: 3},
+        {x: 100, y: 120},
+        {x: 100, y: 160},
+        
+        {x: 150, y: 40},
+        {x: 150, y: 80},
+        {x: 150, y: 120},
+        {x: 150, y: 160}
+    ];
 }
