@@ -24,6 +24,7 @@ class Ball {
     boundTop = 0;
     boundBottom = 0;
     moveable = true;
+    isLaunched = false;
     deadDelegate = dead => {};
 
     collisionHorizontalChange = 0;
@@ -47,6 +48,12 @@ class Ball {
         this.y = getRandomInt(this.radius, this.canvas.height - this.radius);
         this.updateBounds();
     }
+
+    launch = () => {
+        this.isLaunched = true;
+        this.vx = 0;
+        this.vy = -5;
+    };
 
     draw = () => {
         this.drawBall(this.x, this.y, this.radius, this.color);

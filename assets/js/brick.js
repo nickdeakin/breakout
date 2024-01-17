@@ -57,15 +57,13 @@ class Brick {
         const otherCenterX = other.x + other.radius;
         const otherCenterY = other.y + other.radius;
 
-        const leftTest = Math.abs(this.x - otherCenterX);
-        const rightTest = Math.abs((this.x + this.width) - otherCenterX);
+        const leftTest = other.vx < 0 ? 999 : Math.abs(this.x - (otherCenterX + (other.radius / 2)) );
+        const rightTest = other.vx > 0 ? 999 : Math.abs((this.x + this.width) - other.x);
 
-        const topTest = Math.abs(this.y - otherCenterY);
-        const bottomTest = Math.abs((this.y + this.height) - otherCenterY);
+        const topTest = other.vy < 0 ? 999 :  Math.abs(this.y - (otherCenterY + (other.radius / 2)) );
+        const bottomTest = other.vy > 0 ? 999 : Math.abs((this.y + this.height) - other.y);
 
         const smallest = Math.min(...[leftTest, rightTest, topTest, bottomTest]);
-
-debugger;
 
         if (smallest === rightTest) {
             return 'RIGHT';

@@ -86,6 +86,7 @@ class Game {
                 this.startNewGame();
                 break;
             case Game.GAME_PLAYING:
+                this.launchBall();
                 break;
             case Game.GAME_OVER:
                 break;
@@ -116,8 +117,11 @@ class Game {
     }
 
     deadDelegate = dead => {
-        if (dead) {
+        this.score.deductLife();
+        if (this.score.lives < 1) {
             this.currentState = Game.GAME_OVER
+        } else {
+            this.restart();
         }
     }
 
@@ -145,6 +149,12 @@ class Game {
         this.runLoop();
     };
 
+    launchBall = () => {
+        if (!this.ball.isLaunched) {
+            this.ball.launch();
+        }
+    };
+
     // Refactor
     createGameObjects = async () => {
         this.mouseDelegates = [];
@@ -161,16 +171,33 @@ class Game {
 
         this.ball = new Ball(this.ctx, this.canvas, 5, 'rgba(240, 240, 240, 1)', false);
         this.ball.deadDelegate = this.deadDelegate;
-        this.ball.x = 450;
-        //this.ball.x = (this.canvas.width / 2) - (this.ball.radius / 2);
-        this.ball.y = 50;
-        this.ball.vy = 5;
-        this.ball.vx = -0.5;
+
+        /*
+        this.ball.x = (this.canvas.width / 2) - (this.ball.radius / 2);
+        this.ball.y = 450;
+        this.ball.vy = -5;
+        this.ball.vx = 0;
+
+        this.ball.x = 200;
+        this.ball.y = 400;
+        this.ball.vy = 1;
+        this.ball.vx = 1;
+        */
+
         this.gameObjects.push(this.ball);
 
         this.paddle = new Paddle(this.ctx, this.canvas);
         this.mouseDelegates.push(this.paddle);
         this.gameObjects.push(this.paddle);
+        this.paddle.ball = this.ball;
+        this.restart();
+    };
+
+    restart = () => {
+        this.ball.isLaunched = false;
+        this.ball.vx = 0;
+        this.ball.vy = 0;
+        this.paddle.setBallPositionOnPaddle();
     };
 
     detectCollisions = () => {

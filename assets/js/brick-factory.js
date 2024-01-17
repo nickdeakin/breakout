@@ -5,7 +5,7 @@ class BrickFactory {
     ctx;
     canCollide = true;
     brickScore = 5;
-    frequency = 500;
+    frequency = 1500;
     bricks = [];
     interval;
     scoreDelegate = amount => {};
@@ -18,18 +18,20 @@ class BrickFactory {
     generateBricks = () => {
         this.interval = setInterval(() => {
 
+            /*
             if (this.bricks.length > 0) {
                 return;
             } else {
                 const brick = new Brick(this.ctx, this.canvas);
                 const x = 425;
-                const y = 300;
+                const y = 250;
                 brick.x = x;
                 brick.y = y;
                 brick.scoreDelegate = this.scoreDelegate;
                 this.bricks.push(brick);
                 return;
             }
+            */
 
             const brick = new Brick(this.ctx, this.canvas);
             const x = getRandomInt(0, this.canvas.width - brick.width);
