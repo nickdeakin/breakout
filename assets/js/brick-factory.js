@@ -8,6 +8,7 @@ class BrickFactory {
     frequency = 1500;
     bricks = [];
     interval;
+
     scoreDelegate = amount => {};
 
     constructor(ctx, canvas) {
@@ -15,7 +16,7 @@ class BrickFactory {
         this.ctx = ctx;
     }
 
-    generateBricks = () => {
+    generateRandomBricks = () => {
         this.interval = setInterval(() => {
 
             /*
@@ -34,8 +35,8 @@ class BrickFactory {
             */
 
             const brick = new Brick(this.ctx, this.canvas);
-            const x = getRandomInt(0, this.canvas.width - brick.width);
-            const y = getRandomInt(0, (this.canvas.height / 2) - brick.height);
+            const x = getRandomInt(1, Math.floor(this.canvas.width / brick.width) + 1) * brick.width - brick.width;
+            const y = getRandomInt(1, Math.floor((this.canvas.height / brick.height) * .6)) * brick.height - brick.height;
             brick.x = x;
             brick.y = y;
             brick.scoreDelegate = this.scoreDelegate;

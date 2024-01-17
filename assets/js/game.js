@@ -52,7 +52,7 @@ class Game {
         await this.createGameObjects();
         
         this.score.reset();
-        this.brickFactory.generateBricks();
+        this.brickFactory.generateRandomBricks();
 
         this.currentState = Game.GAME_PLAYING;
     };
