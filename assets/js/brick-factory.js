@@ -77,4 +77,32 @@ class BrickFactory {
             this.bricks.push(brick);
         });
     }
+
+    setLevelBrickMap = brickMap => {
+        const bricks = this.readMap(brickMap);        
+        bricks.forEach(x => {
+            const brick = new Brick(this.ctx, this.canvas);
+            brick.x = x.x;
+            brick.y = x.y;
+            brick.lives = x.lives ?? 1;
+            brick.scoreDelegate = this.scoreDelegate;
+            this.bricks.push(brick);
+        });
+    }
+
+    readMap = brickMap => {
+        return brickMap.split('\n')
+        .map((row, rowIndex) => row.
+            split('')
+            .map((element, colIndex) => {
+                return { 
+                    x: colIndex * 40, 
+                    y: rowIndex * 20, 
+                    lives: element === ' ' ? 0 : parseInt(element)
+                }
+            }
+            )
+        )
+        .flat();
+    };
 }

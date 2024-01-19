@@ -9,7 +9,12 @@ const init = async () => {
 };
 
 const createCanvas = () => {
-    canvas = document.getElementById('canvas');
+    const body = document.getElementsByTagName('body')[0];
+    canvas = document.createElement('canvas');
+    canvas.setAttribute('id', 'canvas');
+    canvas.setAttribute('width', window.innerWidth - 2);
+    canvas.setAttribute('height', window.innerHeight - 2);
+    body.appendChild(canvas);
     ctx = canvas.getContext('2d');
 };
 

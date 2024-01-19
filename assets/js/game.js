@@ -53,8 +53,7 @@ class Game {
         
         this.score.reset();
         //this.brickFactory.generateRandomBricks();
-
-        this.brickFactory.setLevelBricks(this.testBricks);
+        this.brickFactory.setLevelBrickMap(this.testBricks);
 
         this.currentState = Game.GAME_PLAYING;
     };
@@ -259,20 +258,24 @@ class Game {
         drawText(this.ctx, { ...this.textParams, ...{ extraY: 32 } }, 'Press R to reload');
     };
 
-    testBricks = [
-        {x: 50, y: 40},
-        {x: 50, y: 80},
-        {x: 50, y: 120},
-        {x: 50, y: 160},
-        
-        {x: 100, y: 40},
-        {x: 100, y: 80, lives: 3},
-        {x: 100, y: 120},
-        {x: 100, y: 160},
-        
-        {x: 150, y: 40},
-        {x: 150, y: 80},
-        {x: 150, y: 120},
-        {x: 150, y: 160}
-    ];
-}
+testBricks = 
+`
+
+  1221 1221 1221 34321 
+  1221 1221 1221 41342 
+  1221 1221 1221 12345
+
+  222222        222222
+   222222      222222
+    222222    222222
+     222222  222222
+      222222222222
+       2222222222
+
+       22222222222222222222
+       22224422222222244222
+       22222222222222222222
+       22222222222222222222
+       22222222222222222222
+  `;
+};
